@@ -1,0 +1,18 @@
+# Maven
+target/
+
+# Python Virtual Environment
+.venv/
+__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# App Specific Caches
+cache*.json
+
+# Logs
+*.log

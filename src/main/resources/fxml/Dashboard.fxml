@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tradematrix.DashboardController" stylesheets="@../css/style.css">
+    
+    <VBox styleClass="sidebar" prefWidth="240" spacing="15">
+        <Label text="TradeMatrix" styleClass="title-brand">
+            <VBox.margin><Insets bottom="30" top="10"/></VBox.margin>
+        </Label>
+        
+        <Button fx:id="btnProfile" text=" Profile" onAction="#handleGoToProfile" styleClass="nav-button" maxWidth="Infinity"/>
+        <Button fx:id="btnDashboard" text=" Dashboard" onAction="#handleGoToDashboard" styleClass="nav-button" maxWidth="Infinity"/>
+        <Button fx:id="btnPortfolio" text=" Portfolio" onAction="#handleGoToPortfolio" styleClass="nav-button" maxWidth="Infinity"/>
+        <Button fx:id="btnHistory" text=" History" onAction="#handleGoToHistory" styleClass="nav-button" maxWidth="Infinity"/>
+        <Button fx:id="btnSettings" text=" Settings" onAction="#handleGoToSettings" styleClass="nav-button" maxWidth="Infinity"/>
+        
+        <Separator style="-fx-padding: 10 0; -fx-border-color: #334155; -fx-border-width: 0 0 1 0;"/>
+        
+        <Button text="🚪 Logout" onAction="#handleLogout" styleClass="nav-button" maxWidth="Infinity" style="-fx-text-fill: #ef4444;"/>
+    </VBox>
+    
+    <ScrollPane HBox.hgrow="ALWAYS" fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-width: 0;">
+        <VBox spacing="15" style="-fx-padding: 20; -fx-background-color: transparent;">
+            <VBox fx:id="profileDetailsCard" styleClass="card" spacing="10" visible="false" managed="false">
+                <Label text="Profile Details" styleClass="title-main"/>
+                <Label fx:id="profileUsernameLabel" text="Username: N/A" styleClass="text-bold-muted"/>
+                <Label fx:id="profileEmailLabel" text="Email: N/A" styleClass="text-bold-muted"/>
+                <Label fx:id="profileNameLabel" text="Name: N/A" styleClass="text-bold-muted"/>
+                <Label fx:id="profileMobileLabel" text="Mobile: N/A" styleClass="text-bold-muted"/>
+                <Label fx:id="profileCurrencyLabel" text="Base Currency: N/A" styleClass="text-bold-muted"/>
+                <Button text="Update Details" onAction="#handleUpdateDetails" styleClass="action-btn" maxWidth="Infinity" style="-fx-background-color: #22c55e;"/>
+            </VBox>
+
+            <VBox fx:id="dashboardContent" spacing="15" VBox.vgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <Label text="Live Dashboard" styleClass="title-main" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    <Button text="Refresh Dashboard ↻" onAction="#handleRefresh" styleClass="action-btn" style="-fx-background-color: #0ea5e9;"/>
+                </HBox>
+                
+                <HBox spacing="15">
+                    <VBox styleClass="card" HBox.hgrow="ALWAYS" alignment="CENTER" style="-fx-padding: 15;">
+                        <Label text="Total Invested:" styleClass="text-bold-muted"/>
+                        <Label fx:id="totalInvestedLabel" text="0.00" styleClass="value-large"/>
+                    </VBox>
+                    <VBox styleClass="card" HBox.hgrow="ALWAYS" alignment="CENTER" style="-fx-padding: 15;">
+                        <Label text="Current Value:" styleClass="text-success"/>
+                        <Label fx:id="currentValueLabel" text="0.00" styleClass="value-large"/>
+                    </VBox>
+                    <VBox styleClass="card" HBox.hgrow="ALWAYS" alignment="CENTER" style="-fx-padding: 15;">
+                        <Label text="Profit / Loss:" styleClass="text-info"/>
+                        <Label fx:id="pnlLabel" text="0.00 (0.00%)" styleClass="value-large"/>
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="15" minHeight="150">
+                    <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="2" style="-fx-padding: 10;">
+                        <Label text="Portfolio Performance (vs Nifty 50)" styleClass="subtitle"/>
+                        <LineChart fx:id="benchmarkChart" VBox.vgrow="ALWAYS" createSymbols="false">
+                            <xAxis><CategoryAxis styleClass="axis-label"/></xAxis>
+                            <yAxis><NumberAxis styleClass="axis-label" forceZeroInRange="false"/></yAxis>
+                        </LineChart>
+                    </VBox>
+                    <VBox styleClass="card" prefWidth="280" spacing="2" style="-fx-padding: 10;">
+                        <Label text="Asset Diversification" styleClass="subtitle"/>
+                        <PieChart fx:id="sectorPieChart" VBox.vgrow="ALWAYS" labelsVisible="false" legendVisible="false"/>
+                    </VBox>
+                </HBox>
+
+                <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="5" minHeight="220" style="-fx-padding: 15;">
+                    <Label text="Current Holdings" styleClass="subtitle"/>
+                    <TableView fx:id="holdingsTable" VBox.vgrow="ALWAYS" styleClass="table-view" minHeight="180">
+                        <columns>
+                            <TableColumn fx:id="tickerCol" text="Symbol" prefWidth="120"/>
+                            <TableColumn fx:id="qtyCol" text="Qty" prefWidth="80"/>
+                            <TableColumn fx:id="avgCostCol" text="Avg Cost" prefWidth="100"/>
+                            <TableColumn fx:id="ltpCol" text="LTP" prefWidth="100"/>
+                            <TableColumn fx:id="investedCol" text="Invested" prefWidth="120"/>
+                            <TableColumn fx:id="currentValCol" text="Current Value" prefWidth="120"/>
+                            <TableColumn fx:id="pnlCol" text="P&amp;L" prefWidth="120"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</HBox>
