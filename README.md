@@ -45,8 +45,5 @@ TradeMatrix is a professional-grade stock portfolio tracker built with **JavaFX*
    mvn clean javafx:run
    ```
 
-## 📸 Screenshots
-*(Coming soon - Add your dashboard screenshots here!)*
 
----
 Developed by [divyabauskar](https://github.com/divyabauskar)
