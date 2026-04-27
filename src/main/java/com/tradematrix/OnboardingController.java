@@ -117,15 +117,8 @@ public class OnboardingController extends SidebarController {
         }
     }
     
-    @FXML private void handleGoToDashboard() { updateNavSelection(btnDashboard); navigate("/fxml/Dashboard.fxml"); }
-    @FXML private void handleGoToPortfolio() { updateNavSelection(btnPortfolio); navigate("/fxml/Onboarding.fxml"); }
-    @FXML private void handleGoToHistory() { updateNavSelection(btnHistory); navigate("/fxml/History.fxml"); }
-    @FXML private void handleGoToSettings() { updateNavSelection(btnSettings); navigate("/fxml/Settings.fxml"); }
-
-    private void navigate(String path) {
-        try {
-            javafx.scene.Parent root = javafx.fxml.FXMLLoader.load(getClass().getResource(path));
-            tickerField.getScene().setRoot(root);
-        } catch (Exception e) { e.printStackTrace(); }
-    }
+    @FXML private void handleGoToDashboard() { updateNavSelection(btnDashboard); navigate(tickerField, "/fxml/Dashboard.fxml"); }
+    @FXML private void handleGoToPortfolio() { updateNavSelection(btnPortfolio); navigate(tickerField, "/fxml/Onboarding.fxml"); }
+    @FXML private void handleGoToHistory() { updateNavSelection(btnHistory); navigate(tickerField, "/fxml/History.fxml"); }
+    @FXML private void handleGoToSettings() { updateNavSelection(btnSettings); navigate(tickerField, "/fxml/Settings.fxml"); }
 }

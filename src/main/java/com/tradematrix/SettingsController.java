@@ -42,23 +42,9 @@ public class SettingsController extends SidebarController {
         boolean isLight = selected.equals("Light Mode");
         UserSession.getInstance().setLightMode(isLight);
         
-        java.net.URL resource = getClass().getResource("/css/light-theme.css");
-        if (resource == null) {
-            statusLabel.setText("Light theme CSS not found by IDE/ClassLoader. Please restart/recompile.");
-            statusLabel.setStyle("-fx-text-fill: red;");
-            return;
-        }
-        String lightCss = resource.toExternalForm();
-        
-        if (statusLabel.getScene() != null) {
-            if (isLight) {
-                if (!statusLabel.getScene().getStylesheets().contains(lightCss)) {
-                    statusLabel.getScene().getStylesheets().add(lightCss);
-                }
-            } else {
-                statusLabel.getScene().getStylesheets().remove(lightCss);
-            }
-        }
+        // Apply theme immediately to both scene and current root to force override
+        applyThemeToScene(statusLabel.getScene());
+        applyThemeToNode(statusLabel.getScene().getRoot());
         
         statusLabel.setText("Changes saved successfully");
         statusLabel.setStyle("-fx-text-fill: #22c55e;");
@@ -84,15 +70,8 @@ public class SettingsController extends SidebarController {
         }
     }
     
-    @FXML private void handleGoToDashboard() { updateNavSelection(btnDashboard); navigate("/fxml/Dashboard.fxml"); }
-    @FXML private void handleGoToPortfolio() { updateNavSelection(btnPortfolio); navigate("/fxml/Onboarding.fxml"); }
-    @FXML private void handleGoToHistory() { updateNavSelection(btnHistory); navigate("/fxml/History.fxml"); }
-    @FXML private void handleGoToSettings() { updateNavSelection(btnSettings); navigate("/fxml/Settings.fxml"); }
-
-    private void navigate(String path) {
-        try {
-            javafx.scene.Parent root = javafx.fxml.FXMLLoader.load(getClass().getResource(path));
-            statusLabel.getScene().setRoot(root);
-        } catch (Exception e) { e.printStackTrace(); }
-    }
+    @FXML private void handleGoToDashboard() { updateNavSelection(btnDashboard); navigate(statusLabel, "/fxml/Dashboard.fxml"); }
+    @FXML private void handleGoToPortfolio() { updateNavSelection(btnPortfolio); navigate(statusLabel, "/fxml/Onboarding.fxml"); }
+    @FXML private void handleGoToHistory() { updateNavSelection(btnHistory); navigate(statusLabel, "/fxml/History.fxml"); }
+    @FXML private void handleGoToSettings() { updateNavSelection(btnSettings); navigate(statusLabel, "/fxml/Settings.fxml"); }
 }

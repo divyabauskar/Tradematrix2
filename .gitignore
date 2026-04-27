@@ -16,3 +16,7 @@ cache*.json
 
 # Logs
 *.log
+
+# Database binary files
+database/*.db
+database/*.sqlite

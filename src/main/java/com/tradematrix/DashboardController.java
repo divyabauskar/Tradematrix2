@@ -684,8 +684,10 @@ public class DashboardController extends SidebarController {
         session.logout();
         
         try {
+            javafx.scene.Scene scene = totalInvestedLabel.getScene();
             javafx.scene.Parent root = javafx.fxml.FXMLLoader.load(getClass().getResource("/fxml/LoginView.fxml"));
-            totalInvestedLabel.getScene().setRoot(root);
+            applyTheme(scene);
+            scene.setRoot(root);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -693,9 +695,9 @@ public class DashboardController extends SidebarController {
     
     @FXML private void handleGoToProfile() { updateNavSelection(btnProfile); showProfile(); }
     @FXML private void handleGoToDashboard() { updateNavSelection(btnDashboard); showDashboard(); }
-    @FXML private void handleGoToPortfolio() { updateNavSelection(btnPortfolio); navigate("/fxml/Onboarding.fxml"); }
-    @FXML private void handleGoToHistory() { updateNavSelection(btnHistory); navigate("/fxml/History.fxml"); }
-    @FXML private void handleGoToSettings() { updateNavSelection(btnSettings); navigate("/fxml/Settings.fxml"); }
+    @FXML private void handleGoToPortfolio() { updateNavSelection(btnPortfolio); navigate(totalInvestedLabel, "/fxml/Onboarding.fxml"); }
+    @FXML private void handleGoToHistory() { updateNavSelection(btnHistory); navigate(totalInvestedLabel, "/fxml/History.fxml"); }
+    @FXML private void handleGoToSettings() { updateNavSelection(btnSettings); navigate(totalInvestedLabel, "/fxml/Settings.fxml"); }
 
     private void showProfile() {
         if (profileDetailsCard != null && dashboardContent != null) {

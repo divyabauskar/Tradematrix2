@@ -63,8 +63,10 @@ public class LoginViewController {
 
     private void loadDashboard() {
         try {
+            javafx.scene.Scene scene = usernameField.getScene();
             javafx.scene.Parent root = javafx.fxml.FXMLLoader.load(getClass().getResource("/fxml/Dashboard.fxml"));
-            usernameField.getScene().setRoot(root);
+            SidebarController.applyTheme(scene);
+            scene.setRoot(root);
         } catch (Exception e) {
             statusLabel.setText("Navigation Error: " + e.getMessage());
             e.printStackTrace();

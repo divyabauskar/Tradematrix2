@@ -87,15 +87,8 @@ public class HistoryController extends SidebarController {
         }
     }
     
-    @FXML private void handleGoToDashboard() { updateNavSelection(btnDashboard); navigate("/fxml/Dashboard.fxml"); }
-    @FXML private void handleGoToPortfolio() { updateNavSelection(btnPortfolio); navigate("/fxml/Onboarding.fxml"); }
-    @FXML private void handleGoToHistory() { updateNavSelection(btnHistory); navigate("/fxml/History.fxml"); }
-    @FXML private void handleGoToSettings() { updateNavSelection(btnSettings); navigate("/fxml/Settings.fxml"); }
-
-    private void navigate(String path) {
-        try {
-            javafx.scene.Parent root = javafx.fxml.FXMLLoader.load(getClass().getResource(path));
-            historyTable.getScene().setRoot(root);
-        } catch (Exception e) { e.printStackTrace(); }
-    }
+    @FXML private void handleGoToDashboard() { updateNavSelection(btnDashboard); navigate(historyTable, "/fxml/Dashboard.fxml"); }
+    @FXML private void handleGoToPortfolio() { updateNavSelection(btnPortfolio); navigate(historyTable, "/fxml/Onboarding.fxml"); }
+    @FXML private void handleGoToHistory() { updateNavSelection(btnHistory); navigate(historyTable, "/fxml/History.fxml"); }
+    @FXML private void handleGoToSettings() { updateNavSelection(btnSettings); navigate(historyTable, "/fxml/Settings.fxml"); }
 }
